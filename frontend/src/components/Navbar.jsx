@@ -1,12 +1,12 @@
 import { Link , useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-t
+
 export default function Navbar() {
     const { pathname } = useLocation();
     const links = [
         {name: "Home", path: "/" },
         {name: "Add Product", path: "/add-product"},
-        {name: "profile", path: "/login"}
+        {name: "Profile", path: "/login"}
     ];
 
     return (
