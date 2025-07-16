@@ -10,4 +10,5 @@ const router = express.Router();
 router.post("/", authMiddleware, addReview);                         // POST /api/reviews
 router.get("/:productId", getReviewsForProduct);                     // GET /api/reviews/:productId
 
-export default router;
+module.exports = router; // ✅ CommonJS
+

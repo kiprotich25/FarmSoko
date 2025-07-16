@@ -18,24 +18,31 @@ export default function Register() {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   };
     const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (form.password !== form.confirm) {
-      toast.error("Passwords do not match");
-      return;
-    }
-    try {
-      await API.post("/auth/register", {
-        name: form.name,
-        email: form.email,
-        password: form.password,
-      });
-      toast.success("Registered! Please log in.");
-      navigate("/login");
-    } catch (err) {
-      console.error(err);
-      toast.error("Registration failed.");
-    }
+  e.preventDefault();
+
+  if (form.password !== form.confirm) {
+    toast.error("Passwords do not match");
+    return;
+  }
+
+  const payload = {
+    username: form.name,     // ✅ match backend
+    email: form.email,
+    password: form.password,
   };
+
+  console.log("Sending to backend:", payload); // ✅ debug
+
+  try {
+    const res = await API.post("/auth/register", payload);
+    toast.success("Registered!");
+    navigate("/login");
+  } catch (err) {
+    console.error("Register error:", err.response?.data || err.message);
+    toast.error(err.response?.data?.message || "Registration failed.");
+  }
+};
+
     return (
     <div className="p-6 max-w-md mx-auto space-y-4">
       <h2 className="text-2xl font-bold text-center">Register</h2>

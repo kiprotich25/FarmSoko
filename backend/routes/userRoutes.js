@@ -6,4 +6,5 @@ const router = express.Router();
 router.get("/:id", getUserById);       // GET /api/users/:id
 router.get("/", getAllSellers);        // GET /api/users/ (returns all sellers)
 
-export default router;
+module.exports = router; // ✅ CommonJS
+

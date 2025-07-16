@@ -5,6 +5,8 @@ import AddProduct from "./pages/AddProduct";
 import ProductDetails from "./pages/ProductDetails";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import PrivateRoute from "./components/PrivateRoute";
+import Login from "./pages/Login"
 
 
 function App() {
@@ -12,11 +14,25 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
+        <Route path="/login" element={<Login />} />
+
         <Route path="/" element={<Home />} />
-        <Route path="/add-product" element={<AddProduct />} />
+        
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/add-product"
+          element={
+            <PrivateRoute>
+              <AddProduct />
+            </PrivateRoute>
+          }/>
+        <Route path="/dashboard" element={
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        } />
+
         <Route path="*" element={<p className="text-center mt-10">Page not found.</p>} />
       </Routes>
     </Router>

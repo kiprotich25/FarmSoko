@@ -7,6 +7,8 @@ export default function AddProduct() {
   const navigate = useNavigate();
 
   const handleAdd = async (formData) => {
+    
+     console.log("Product sending:", formData);
     try {
       const res = await API.post("/products", formData);
       toast.success("Product posted successfully!");

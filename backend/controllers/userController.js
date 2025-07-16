@@ -1,23 +1,21 @@
-const Review= require("../models/Review");
-
-exports.addReview = async (req, res) => {
-  const { product, rating, comment } = req.body;
-  const reviewer = req.user.userId;
-
+const User = require ("../models/User.js");
+exports.getUserById = async (req, res) => {
   try {
-    const review = new Review({ product, rating, comment, reviewer });
-    await review.save();
-    res.status(201).json(review);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-};
-
-exports.getReviewsForProduct = async (req, res) => {
-  try {
-    const reviews = await Review.find({ product: req.params.productId }).populate("reviewer", "username");
-    res.json(reviews);
+    const user = await User.findById(req.params.id).select("-password");
+        if (!user) return res.status(404).json({ error: "User not found" });
+            res.json(user);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
+exports.getAllSellers = async (req, res) => {
+  try {
+    const sellers = await User.find({ role: "farmer" }).select("-password");
+    res.json(sellers);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+
+

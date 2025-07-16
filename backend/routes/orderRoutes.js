@@ -7,5 +7,6 @@ const router = express.Router();
 router.post("/", authMiddleware, createOrder);      // POST /api/orders
 router.get("/mine", authMiddleware, getMyOrders);   // GET /api/orders/mine
 
-export default router;
+module.exports = router; // ✅ CommonJS
+
 
