@@ -1,3 +1,4 @@
+/////productController.js
 const Product = require("../models/Product");
 
 exports.createProduct = async (req, res ) => {
@@ -24,8 +25,8 @@ exports.getProducts = async (req, res) => {
     if (category) {
       filter.category = category;
     }
-
-    const products = await Product.find(filter).populate("seller");
+    const products = await Product.find()
+    //const products = await Product.find(filter).populate("seller");
     res.json(products);
   } catch (error) {
     res.status(500).json({ message: error.message });

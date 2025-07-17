@@ -1,3 +1,4 @@
+// AddProduct.jsx
 import ProductForm from "../components/ProductForm";
 import API from "../services/api";
 import { useNavigate } from "react-router-dom";
