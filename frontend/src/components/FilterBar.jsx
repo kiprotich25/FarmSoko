@@ -39,7 +39,7 @@ export default function FilterBar({ onFilter }) {
       >
         <option value="">All Categories</option>
         {categories.map((cat) => (
-          <option key={cat._id} value={cat.name}>
+          <option key={cat._id} value={cat._id}>
             {cat.name}
           </option>
         ))}

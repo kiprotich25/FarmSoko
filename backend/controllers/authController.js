@@ -5,6 +5,8 @@ const User = require("../models/User");
 
 exports.register = async (req, res) => {
     const { username, email, password, role } = req.body;
+    
+
     try {
         const userExists = await User.findOne( {email});
         if (userExists) {
@@ -16,6 +18,15 @@ exports.register = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password,10);
         const newUser = new User({username, email, password: hashedPassword, role: role || 'farmer'})
         await newUser.save();
+        const token = jwt.sign({ userId: newUser._id, role: newUser.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
+        return res.status(201).json({
+          _id: newUser._id,
+         username: newUser.username,
+          email: newUser.email,
+          role: newUser.role,
+          token,
+        });
+
         
         // if (newUser) {
         //     res.status(201).json({
@@ -63,7 +74,13 @@ exports.getMe = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    res.json(user);
+    
+    res.json({
+            id: user._id,
+            username: user.username,
+            email: user.email,
+            role: user.role
+        });
   } catch (error) {
     console.error("GET /me error:", error);
     res.status(500).json({ message: "Server error" });
