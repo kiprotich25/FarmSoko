@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
 import Login from "./pages/Login"
+import MyProducts  from "./pages/MyProducts";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
+        <Route path="/my-products" element={<MyProducts />} />
         <Route path="/login" element={<Login />} />
 
         <Route path="/" element={<Home />} />

@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import CategoryBadge from "./CategoryBadge";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, showControls }) {
   const navigate = useNavigate();
 
   return (
@@ -24,6 +24,11 @@ export default function ProductCard({ product }) {
           {product.description}
         </p>
         <p className="text-green-700 font-bold">Ksh {product.price}</p>
+        {showControls && (
+        <div className="mt-4 flex space-x-2">
+          <button className="px-3 py-1 bg-yellow-500 text-white rounded">Edit</button>
+          <button className="px-3 py-1 bg-red-500 text-white rounded">Delete</button>
+        </div>)}
       </CardContent>
     </Card>
   );
