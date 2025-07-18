@@ -19,14 +19,17 @@ jobs:
         with:
           node-version: 18
 
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - name: Install backend dependencies
-        run: cd server && npm install
+        run: cd backend && pnpm install
 
       - name: Lint backend
-        run: cd server && npm run lint || true
+        run: cd backend && pnpm lint || true
 
       - name: Run tests
-        run: cd server && npm test || echo "No tests configured"
+        run: cd backend && pnpm test || echo "No tests configured"
 
       # Optional: Ping Render to rebuild backend
       - name: Trigger Render Deploy
