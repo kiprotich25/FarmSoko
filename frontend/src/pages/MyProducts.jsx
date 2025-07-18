@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
-import ProductCard from "../components/ProductCard"; // Reuse existing card component
+import ProductCard from "../components/ProductCard.jsx"; // Reuse existing card component
 
 export default function MyProducts() {
   const [products, setProducts] = useState([]);
