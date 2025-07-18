@@ -3,7 +3,7 @@ const Product = require("../models/Product");
 
 exports.createProduct = async (req, res ) => {
     try {
-        const newProduct = new Product (req.body);
+        const newProduct = new Product ({...req.body,seller: req.user.userId } );
         await newProduct.save();
         res.status(201).json(newProduct);
         

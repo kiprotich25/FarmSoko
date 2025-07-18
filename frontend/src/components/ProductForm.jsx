@@ -1,3 +1,4 @@
+// ProductForm.jsx
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -83,20 +84,21 @@ export default function ProductForm ({onSubmit }) {
                         />
                  </div>
                  <div>
-                        <Label htmlFor="category">Category</Label>
-                        <Select onValueChange={handleCategorySelect}>
+                    <Label htmlFor="category">Category</Label>
+                    <Select value={formData.category} onValueChange={handleCategorySelect}>
                         <SelectTrigger className="w-full">
-                            <SelectValue placeholder="Select category" />
+                        <SelectValue placeholder="Select category" />
                         </SelectTrigger>
                         <SelectContent>
-                            {categories.map((cat) => (
+                        {categories.map((cat) => (
                             <SelectItem key={cat} value={cat}>
-                                {cat}
+                            {cat}
                             </SelectItem>
-                            ))}
+                        ))}
                         </SelectContent>
-                        </Select>
+                    </Select>
                 </div>
+
                 <Button type="submit" className="w-full">
                   Post Product
                 </Button>
