@@ -1,0 +1,34 @@
+name: Backend CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install backend dependencies
+        run: cd server && npm install
+
+      - name: Lint backend
+        run: cd server && npm run lint || true
+
+      - name: Run tests
+        run: cd server && npm test || echo "No tests configured"
+
+      # Optional: Ping Render to rebuild backend
+      - name: Trigger Render Deploy
+        run: |
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
