@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
-import ProductCard from "../components/ProductCard";
-import LoadingSpinner from "../components/LoadingSpinner";
-import EmptyState from "../components/EmptyState";
+import ProductCard from "../components/ProductCard.jsx";
+import LoadingSpinner from "../components/LoadingSpinner.jsx";
+import EmptyState from "../components/EmptyState.jsx";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
