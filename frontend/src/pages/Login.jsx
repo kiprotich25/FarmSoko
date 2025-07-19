@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -10,10 +10,17 @@ import { Link } from "react-router-dom";
 
 
 export default function Login() {
-  const { setUser } = useAuth();
+  const { user,setUser } = useAuth();
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
-
+  
+  // ✅ Redirect if already logged in
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
+  
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };

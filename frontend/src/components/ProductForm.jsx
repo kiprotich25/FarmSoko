@@ -17,15 +17,27 @@ import { useEffect } from "react";
 
 
 
-export default function ProductForm ({onSubmit }) {
+export default function ProductForm ({onSubmit , initialData = null }) {
     const [categories, setCategories] = useState([]);
     const [formData,setFormData] = useState({
-        name:"",
-        price: "",
-        description: "",
-        imageUrl: "",
-        category: "" 
+      name: initialData?.name || "",
+      price: initialData?.price || "",
+      description: initialData?.description || "",
+      imageUrl: initialData?.imageUrl || "",
+      category: initialData?.category || "",  
     });
+    
+      useEffect(() => {
+        if (initialData) {
+          setFormData({
+            name: initialData.name || "",
+            price: initialData.price || "",
+            description: initialData.description || "",
+            imageUrl: initialData.imageUrl || "",
+            category: initialData.category?._id || initialData.category || "",
+          });
+        }
+      }, [initialData]);
      useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -105,7 +117,7 @@ export default function ProductForm ({onSubmit }) {
                         </SelectTrigger>
                         <SelectContent>
                         {categories.map((cat) => (
-                            <SelectItem key={cat._id} value={cat.name}>
+                            <SelectItem key={cat._id} value={cat._id}>
                             {cat.name}
                             </SelectItem>
                         ))}
@@ -114,7 +126,7 @@ export default function ProductForm ({onSubmit }) {
                 </div>
 
                 <Button type="submit" className="w-full">
-                  Post Product
+                  {initialData ? "Update Product" : "Post Product"}
                 </Button>
             </form>
       </CardContent>
