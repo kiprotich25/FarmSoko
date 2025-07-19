@@ -16,6 +16,7 @@ export default function ProductDetails() {
     API.get(`/products/${id}`)
       .then((res) => {
         setProduct(res.data);
+        console.log("Product details:", res.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -54,13 +55,29 @@ export default function ProductDetails() {
             Ksh {product.price}
             </p>
             <div className="flex items-center gap-4">
-            <UserAvatar name="John Farmer" />
-            <div>
-              <p className="font-medium">John Farmer</p>
-              <p className="text-xs text-muted-foreground">Seller</p>
+              <UserAvatar username={product.seller?.username || product.seller?.email || "Seller"} />
+                <div>
+                  <p className="font-medium">
+                    {product.seller?.username || product.seller?.email || "Unknown Seller"}
+                  </p>
+                  <p className="text-xs text-muted-foreground">Seller</p>
+                </div>
+
             </div>
-          </div>
-            <Button className="mt-4 w-full">Contact Seller</Button>
+            
+     <Button
+  className="mt-4 w-full"
+  onClick={() => {
+    const email = product.seller?.email;
+    if (!email) return;
+    const subject = `Interest in ${product.name}`;
+    const body = `Hi, I'm interested in your product "${product.name}" listed on FarmSoko. Please provide more details.`;
+    window.open( `https://mail.google.com/mail/?view=cm&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+  }}
+  disabled={!product.seller?.email}
+>
+  Contact Seller
+</Button>
         </CardContent>
       </Card>
     </div>

@@ -13,12 +13,14 @@ export default function ProductCard({ product, showControls=false, onEdit,onDele
   return (
     <Card
       onClick={() => navigate(`/products/${product._id}`)}
-      className="rounded-xl overflow-hidden shadow hover:shadow-lg transition cursor-pointer p-2"
+      className="rounded-xl overflow-hidden shadow hover:shadow-lg transition cursor-pointer p-1"
     >{product.imageUrl ? (
+       
+    
       <img
         src={product.imageUrl}
         alt={product.name}
-        className="h-40 w-full object-cover rounded-xl"
+        className="max-h-full max-w-full object-contain rounded-xl"
       />
     ): null}
       <CardContent className="p-4 space-y-1">

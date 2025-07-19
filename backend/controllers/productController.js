@@ -47,7 +47,7 @@ exports.getProducts = async (req, res) => {
 
     const products = await Product.find(filter)
       .populate("category", "name")
-      .populate("seller");
+      .populate("seller", "username email");
 
     res.json(products);
   } catch (error) {
@@ -72,7 +72,7 @@ exports.getProductById = async (req, res) => {
 exports.getMyProducts = async (req, res) => {
   try {
     const myProducts = await Product.find({ seller: req.user.userId })
-      .populate("seller", "username")
+      .populate("seller", "username email")
       .populate("category", "name");
 
     res.json(myProducts);

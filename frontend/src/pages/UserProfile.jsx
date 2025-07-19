@@ -96,7 +96,7 @@ export default function UserProfile() {
         )}
 
 
-      <h2 className="text-xl font-semibold mb-2">My Products To Sell</h2>
+      <h2 className="text-xl font-semibold mb-2">My Products To Sell:</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {products.map((p) => (
           <ProductCard
