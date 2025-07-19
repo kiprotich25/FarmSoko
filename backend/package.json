@@ -4,9 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    
+  "test": "jest --detectOpenHandles --forceExit",
+  "dev": "nodemon server.js"
   },
+
+
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -14,10 +17,15 @@
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
-    "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.16.3",
     "nodemon": "^3.1.10"
+  },
+  "devDependencies": {
+    "dotenv": "^17.2.0",
+    "jest": "^30.0.4",
+    "mongodb-memory-server": "^10.1.4",
+    "supertest": "^7.1.3"
   }
 }

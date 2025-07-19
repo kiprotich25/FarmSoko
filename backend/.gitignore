@@ -142,3 +142,22 @@ dist
 
 # SvelteKit build / generate output
 .svelte-kit
+# Node modules
+node_modules/
+
+# Build / transpiled files
+build/
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+
+# Test and coverage
+coverage/
+*.test.js.snap
+
+# System
+.DS_Store

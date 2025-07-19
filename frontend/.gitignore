@@ -29,4 +29,26 @@ dist-ssr
 .env.production.local
 .env.local
 
+# Node modules
+node_modules/
+
+# Vite output
+dist/
+
+# Cypress artifacts
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/
+
+# Test config and cache
+.vitest/
+test-results/
+*.test.js.snap
+
+# React tooling
+.react-devtools
+
+# System
+.DS_Store
+.env.local
 
