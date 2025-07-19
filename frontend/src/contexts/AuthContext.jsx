@@ -1,3 +1,4 @@
+//
 import { createContext, useContext, useEffect, useState } from "react";
 import API from "../services/api";
 
@@ -10,7 +11,7 @@ export function AuthProvider({ children }) {
     const token = localStorage.getItem("token");
     if (token) {
       API.get("/auth/me")
-        .then((res) => setUser(res.data))
+        .then((res) => setUser(res.data.user))
         .catch(() => setUser(null));
     }
   }, []);

@@ -52,7 +52,7 @@ export default function Navbar() {
               </Button>
             </Link>
 
-            <UserAvatar name={user.name} />
+            <UserAvatar username={user.username} />
             <Button variant="outline" onClick={logout} size="sm">
               Logout
             </Button>

@@ -12,10 +12,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import API from "@/services/api";
+import { useEffect } from "react";
 
-const categories = ["Vegetables","Cereals", "Fruits", "Livestock", "Dairy"]
+
 
 export default function ProductForm ({onSubmit }) {
+    const [categories, setCategories] = useState([]);
     const [formData,setFormData] = useState({
         name:"",
         price: "",
@@ -23,6 +26,17 @@ export default function ProductForm ({onSubmit }) {
         imageUrl: "",
         category: "" 
     });
+     useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await API.get("/categories");
+        setCategories(res.data);
+      } catch (err) {
+        console.error("Error fetching categories:", err);
+      }
+    };
+    fetchCategories();
+  }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

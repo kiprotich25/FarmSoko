@@ -15,6 +15,10 @@ app.use("/api/users", require ("./routes/userRoutes"));
 app.use("/api/orders", require("./routes/orderRoutes"));
 app.use("/api/dashboard", require("./routes/dashboardRoutes"));
 app.use("/api/categories", require("./routes/categoryRoutes"));
+app.get("/api/ping", (req, res) => {
+  res.status(200).json({ message: "API is healthy ✅" });
+});
+
 
 
 

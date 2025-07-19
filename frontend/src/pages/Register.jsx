@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [form, setForm] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
     confirm: ""
@@ -26,7 +26,7 @@ export default function Register() {
   }
 
   const payload = {
-    username: form.name,     // ✅ match backend
+    username: form.username,     // ✅ match backend
     email: form.email,
     password: form.password,
   };
@@ -49,7 +49,7 @@ export default function Register() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <Label>Name</Label>
-          <Input name="name" value={form.name} onChange={handleChange} />
+          <Input name="username" value={form.username} onChange={handleChange} />
         </div>
         <div>
           <Label>Email</Label>

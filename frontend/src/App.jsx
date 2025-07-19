@@ -8,11 +8,13 @@ import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
 import Login from "./pages/Login"
 import MyProducts  from "./pages/MyProducts";
+import {Toaster} from 'sonner'
 
 
 function App() {
   return (
     <Router>
+      <Toaster richColors position="top-right" />
       <Navbar />
       <Routes>
         <Route path="/my-products" element={<MyProducts />} />
