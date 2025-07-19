@@ -3,7 +3,7 @@ const Product = require("../models/Product");
 
 exports.createProduct = async (req, res ) => {
     try {
-        const newProduct = new Product ({...req.body,seller: req.body.seller } );
+        const newProduct = new Product ({...req.body,seller: req.body.userId} );
         await newProduct.save();
         res.status(201).json(newProduct);
         
@@ -45,7 +45,8 @@ exports.getProductById = async (req, res) => {
 };
 exports.getMyProducts = async (req, res) => {
   try {
-    const myProducts = await Product.find({ seller: req.user.userId }).populate("category");
+    const myProducts = await Product.find({ seller: req.user.userId }).populate("seller", "username");
+      
     res.json(myProducts);
   } catch (err) {
     res.status(500).json({ message: "Failed to fetch your products" });

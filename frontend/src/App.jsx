@@ -9,6 +9,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Login from "./pages/Login"
 import MyProducts  from "./pages/MyProducts";
 import {Toaster} from 'sonner'
+import UserProfile from "./pages/UserProfile";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Toaster richColors position="top-right" />
       <Navbar />
       <Routes>
+        <Route path="/profile" element={<PrivateRoute>< UserProfile/></PrivateRoute>}/>
         <Route path="/my-products" element={<MyProducts />} />
         <Route path="/login" element={<Login />} />
 

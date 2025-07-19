@@ -9,7 +9,7 @@ export default function Navbar() {
     const links = [
         {name: "Home", path: "/" },
         {name: "Add Product", path: "/add-product"},
-        {name: "Profile", path: "/login"}
+        //{name: "Profile", path: "/login"}
     ];
     const { user, logout } = useAuth();
 
@@ -51,8 +51,10 @@ export default function Navbar() {
                 Dashboard
               </Button>
             </Link>
-
-            <UserAvatar username={user.username} />
+            
+            <Link to="/profile">
+              <UserAvatar username={user.username} />
+            </Link>
             <Button variant="outline" onClick={logout} size="sm">
               Logout
             </Button>

@@ -5,13 +5,14 @@ const authMiddleware = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
-router.post("/", createProduct);
+router.get("/my", authMiddleware, getMyProducts );
+router.post("/",authMiddleware, createProduct);
 router.get("/", getProducts);
 router.get("/:id", getProductById);
-router.put("/:id", updateProduct);
-router.delete("/:id", deleteProduct);
+router.put("/:id",authMiddleware, updateProduct);
+router.delete("/:id",authMiddleware, deleteProduct);
 // GET /api/products/my
-router.get("/my", authMiddleware, getMyProducts );
+
 
 
 module.exports = router; // ✅ CommonJS

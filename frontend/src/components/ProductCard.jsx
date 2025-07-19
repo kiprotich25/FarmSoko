@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import CategoryBadge from "./CategoryBadge";
+import { Button } from "@/components/ui/button"; // ✅ MUST be here
 
-export default function ProductCard({ product, showControls=false }) {
+
+export default function ProductCard({ product, showControls=false, onEdit,onDelete }) {
   const navigate = useNavigate();
   console.log("showControls:", showControls);
   console.log("ProductCard props:", { product, showControls });
@@ -32,12 +34,14 @@ export default function ProductCard({ product, showControls=false }) {
         <div className="flex gap-2">
           <Button onClick={(e) => {
             e.stopPropagation();
+            if (onEdit)
             onEdit(product);
           }}>
             Edit
           </Button>
           <Button onClick={(e) => {
             e.stopPropagation();
+            if (onDelete)
             onDelete(product._id);
           }}>
             Delete
