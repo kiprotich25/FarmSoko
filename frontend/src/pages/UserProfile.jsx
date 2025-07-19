@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
 import ProductCard from "../components/ProductCard.jsx";
+import { toast } from "sonner";
 
 export default function UserProfile() {
   const [user, setUser] = useState(null);
@@ -10,7 +11,7 @@ export default function UserProfile() {
   useEffect(() => {
     // Fetch user info
     API.get("/auth/me")
-      .then((res) => setUser(res.data))
+      .then((res) => setUser(res.data.user))
       .catch((err) => console.error("Failed to fetch user", err));
 
     // Fetch user's products
@@ -18,6 +19,26 @@ export default function UserProfile() {
       .then((res) => setProducts(res.data))
       .catch((err) => console.error("Failed to fetch products", err));
   }, []);
+  const handleDelete = async (productId) => {
+    const confirm = window.confirm("Are you sure you want to delete this product?");
+    if (!confirm) return;
+
+    try {
+      await API.delete(`/products/${productId}`);
+      toast.success("Product deleted");
+      // Refresh product list
+      setProducts((prev) => prev.filter((p) => p._id !== productId));
+    } catch (err) {
+      console.error("Delete failed", err);
+      toast.error("Failed to delete product");
+    }
+  };
+
+  const handleEdit = (product) => {
+    // Navigate to edit form or open modal
+    console.log("Edit clicked for:", product);
+    toast.info("Edit feature not yet implemented");
+  };
 
   if (!user) return <p className="p-4">Loading profile...</p>;
 
@@ -31,15 +52,15 @@ export default function UserProfile() {
         {/* Optional profile pic here */}
       </div>
 
-      <h2 className="text-xl font-semibold mb-2">My Products</h2>
+      <h2 className="text-xl font-semibold mb-2">My Products To Sell</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {products.map((p) => (
           <ProductCard
             key={p._id}
             product={p}
             showControls={true}
-            onEdit={(product) => console.log("Edit", product)}
-            onDelete={(id) => console.log("Delete", id)}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
           />
         ))}
       </div>

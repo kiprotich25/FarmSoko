@@ -24,7 +24,7 @@ export default function ProductCard({ product, showControls=false, onEdit,onDele
       <CardContent className="p-4 space-y-1">
         <div className="flex justify-between items-center">
           <h2 className="text-lg font-semibold">{product.name}</h2>
-          <CategoryBadge category={product.category} />
+          <CategoryBadge category={product.category?.name || "Unknown"}  />
         </div>
         <p className="text-sm text-muted-foreground line-clamp-2">
           {product.description}

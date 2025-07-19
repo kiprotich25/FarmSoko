@@ -12,7 +12,7 @@ export default function Dashboard() {
 
     return (
     <div className="p-6 max-w-6xl mx-auto space-y-6">
-      <h1 className="text-2xl font-bold">Dashboard</h1>
+      <h1 className="text-2xl font-bold">Marketplace Statistics</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <DashboardStatsCard label="Total Products" value={stats.products} />
         <DashboardStatsCard label="Categories" value={stats.categories} />
