@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import CategoryBadge from "./CategoryBadge";
 
-export default function ProductCard({ product, showControls }) {
+export default function ProductCard({ product, showControls=false }) {
   const navigate = useNavigate();
   console.log("showControls:", showControls);
   console.log("ProductCard props:", { product, showControls });
@@ -12,12 +12,13 @@ export default function ProductCard({ product, showControls }) {
     <Card
       onClick={() => navigate(`/products/${product._id}`)}
       className="rounded-xl overflow-hidden shadow hover:shadow-lg transition cursor-pointer p-2"
-    >
+    >{product.imageUrl ? (
       <img
         src={product.imageUrl}
         alt={product.name}
         className="h-40 w-full object-cover rounded-xl"
       />
+    ): null}
       <CardContent className="p-4 space-y-1">
         <div className="flex justify-between items-center">
           <h2 className="text-lg font-semibold">{product.name}</h2>
@@ -27,11 +28,23 @@ export default function ProductCard({ product, showControls }) {
           {product.description}
         </p>
         <p className="text-green-700 font-bold">Ksh {product.price}</p>
-        {showControls && (
-        <div className="mt-4 flex space-x-2 ">
-          <button className="px-3 py-1 bg-yellow-500 text-white rounded">Edit</button>
-          <button className="px-3 py-1 bg-red-500 text-white rounded">Delete</button>
-        </div>)}
+              {showControls && (
+        <div className="flex gap-2">
+          <Button onClick={(e) => {
+            e.stopPropagation();
+            onEdit(product);
+          }}>
+            Edit
+          </Button>
+          <Button onClick={(e) => {
+            e.stopPropagation();
+            onDelete(product._id);
+          }}>
+            Delete
+          </Button>
+        </div>
+      )}
+
       </CardContent>
       
     </Card>

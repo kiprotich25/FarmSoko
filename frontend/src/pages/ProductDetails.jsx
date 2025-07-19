@@ -34,11 +34,13 @@ export default function ProductDetails() {
         <Button variant="ghost" className="mb-2">&larr; Back to Products</Button>
       </Link>
       <Card className="overflow-hidden rounded-xl shadow">
+        {product.imageUrl ? (
         <img
           src={product.imageUrl}
           alt={product.name}
           className="h-72 w-full object-cover"
         />
+        ): null}
         <CardContent className="p-6 space-y-6">
 
         <div className="flex items-center justify-between">

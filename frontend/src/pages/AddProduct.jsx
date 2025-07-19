@@ -18,7 +18,7 @@ export default function AddProduct() {
     const productData = {
       ...formData,
       price: Number(formData.price),
-      seller: user?.id, // or user?._id depending on how you stored it
+      seller: user?.id || user?.username, // or user?._id depending on how you stored it
     };
 
     console.log("Sending product data:", productData);
