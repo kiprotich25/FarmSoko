@@ -65,7 +65,7 @@ export default function UserProfile() {
   }, 100)
     // Navigate to edit form or open modal
     console.log("Edit clicked for:", product);
-    //toast.info("Edit feature not yet implemented");
+    
   };
 
   if (!user) return <p className="p-4">Loading profile...</p>;

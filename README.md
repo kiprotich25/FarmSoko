@@ -6,38 +6,67 @@
 
 ## 🚀 Live Demo
 
-🌐 [View the live app here](https://farm-soko.vercel.app)  
-🧠 Backend API: [API base URL](https://farm-soko-api.onrender.com)
-
+- 🌐 [View the live app here](https://farm-soko.vercel.app)  
+- 🧠 Backend API: [API base URL](https://farm-soko-api.onrender.com)
+-  Video demo: [here]( https://youtu.be/TxKr8b4trv0?feature=shared)
 ---
 
 ## 📸 Screenshots
-Find all the screenshots of the program in the screenshots folder
+
+Find all the screenshots of the program in the `screenshots/` folder.
+
+---
 
 ## 📦 Features
 
-- 🔐 Authentication & Authorization
-- 📤 Product posting with image upload (Cloudinary)
-- 🔍 Search and category filtering
-- 🧾 My Products view (edit/delete only your own)
-- ⚡ Realtime feedback and alerts
+- 🔐 Authentication & Authorization  
+- 📤 Product posting with image upload (Cloudinary)  
+- 🔍 Search and category filtering  
+- 🧾 "My Products" view (edit/delete only your own)  
+- ⚡ Realtime feedback and alerts  
 - 📱 Fully responsive UI (ShadCN + Tailwind CSS)
 
 ---
 
 ## 🧪 Tech Stack
 
-| Tech                      | Role                |
-|---------------------------|---------------------|
-| MongoDB                   | NoSQL Database      |
-| Express.js                | Backend Framework   |
-| React.js                  | Frontend UI         |
-| Node.js                   | Server Runtime      |
-| Tailwind CSS + ShadCN     | Styling & Components|
-| JWT                       | User Authentication |
-| Vite                      | React Build Tool    |
-| Vercel                    | Frontend Hosting    |
-| Render                    | Backend Hosting     |
+| Tech                   | Role                  |
+|------------------------|-----------------------|
+| MongoDB                | NoSQL Database        |
+| Express.js             | Backend Framework     |
+| React.js               | Frontend UI           |
+| Node.js                | Server Runtime        |
+| Tailwind CSS + ShadCN  | Styling & Components  |
+| JWT                    | User Authentication   |
+| Vite                   | React Build Tool      |
+| Vercel                 | Frontend Hosting      |
+| Render                 | Backend Hosting       |
+
+---
+
+## 🗂️ Technical Architecture Diagram
+
+ 
+
+       ┌────────────────────┐
+       │   Frontend (React) │
+       │ Vite + Tailwind    │
+       │ ShadCN Components  │
+       └────────┬───────────┘
+                │
+       Fetch / Submit
+                │
+       ┌────────▼────────┐
+       │  Backend (Node) │
+       │  Express Server │
+       └────────┬────────┘
+                │
+      ┌─────────▼─────────┐
+      │   MongoDB Atlas   │
+      │ (products, users) │
+      └───────────────────┘
+
+
 
 ---
 
@@ -48,26 +77,28 @@ Find all the screenshots of the program in the screenshots folder
 ```bash
 git clone https://github.com/kiprotich25/FarmSoko.git
 cd farmsoko
-
 Set up environment variables
+
 Create two .env files:
 
-     backend/.env:
-     .env
+backend/.env
+
+env
 MONGO_URI=your_mongodb_uri
 JWT_SECRET=your_jwt_secret
+frontend/.env
 
-frontend/.env:
-     .env
+.env
 VITE_API_BASE_URL=https://your-backend-url.com/api
-
 Install dependencies
 
+bash
+Copy
+Edit
 pnpm install
 cd backend && pnpm install
 cd ../frontend && pnpm install
 Run the app locally
-
 
 # In /backend
 pnpm run dev
@@ -76,35 +107,38 @@ pnpm run dev
 pnpm run dev
 🔬 Testing
 ✅ Unit & Integration tests using Jest and Supertest
-
 ✅ MongoDB Memory Server for in-memory testing
 
+Run backend tests:
 
-To run backend tests:
 cd backend
 pnpm test
+Run frontend tests:
 
-
-To run frontend tests:
 cd frontend
 pnpm test
-
 ⚙️ Architecture Overview
-Monorepo with separate frontend/ and backend/
+Monorepo with separate frontend/ and backend/ folders
+
 RESTful API with Express and JWT-based auth
-Frontend with Vite + React + Tailwind + ShadCN
+
+Frontend built using Vite + React + Tailwind CSS + ShadCN
+
 CI/CD via GitHub Actions
 
-
 🎥 Demo Video
-🎬 Watch the demo video in its folder
+🎬 Watch the demo video here on this link : https://youtu.be/TxKr8b4trv0?feature=shared
 
-📚 API Documentation
-See backend/docs/API.md for detailed route info, request formats, and examples.
+
 
 🙋‍♀️ Author
 Ian Kiprotich
 [GitHub](https://github.com/kiprotich25)
 
+
 🏁 License
-MIT License
+Licensed under the MIT License
+
+
+
+
