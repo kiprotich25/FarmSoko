@@ -1,36 +1,40 @@
-name: Frontend CI/CD
+name: Frontend CI
 
 on:
   push:
-    branches: [main]
+    paths:
+      - 'frontend/**'
+    branches: [main, dev]
   pull_request:
+    paths:
+      - 'frontend/**'
     branches: [main]
 
 jobs:
-  build-and-deploy:
+  build-and-test:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+    defaults:
+      run:
+        working-directory: frontend
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
+          cache: pnpm
 
       - name: Install pnpm
         run: npm install -g pnpm
 
-      - name: Install dependencies
+      - name: Install deps
+        run: pnpm install
 
-        run: cd frontend && pnpm install
-
-      - name: Run linter
-        run: cd frontend && pnpm lint || true
-
+      - name: Run unit tests (optional)
+        run: pnpm test --if-present
 
       - name: Build frontend
-        run: cd frontend && npm run build
-
-      # Optional: Deploy to Vercel (automatic if Vercel GitHub integration is enabled)
+        run: pnpm build
