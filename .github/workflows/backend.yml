@@ -1,38 +1,51 @@
-name: Backend CI/CD
+name: Backend CI
 
 on:
   push:
-    branches: [main]
+    paths:
+      - 'backend/**'
+    branches: [main, dev]
   pull_request:
+    paths:
+      - 'backend/**'
     branches: [main]
 
 jobs:
-  test-and-deploy:
+  test:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+    services:
+      mongo:
+        image: mongo:6
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd="mongosh --eval 'db.adminCommand(\"ping\")'" 
+          --health-interval=10s 
+          --health-timeout=5s 
+          --health-retries=5
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
+          cache: pnpm
 
       - name: Install pnpm
         run: npm install -g pnpm
 
-      - name: Install backend dependencies
-
-        run: cd backend && pnpm install
-
-      - name: Lint backend
-        run: cd backend && pnpm lint || true
+      - name: Install deps
+        run: pnpm install
 
       - name: Run tests
-        run: cd backend && pnpm test || echo "No tests configured"
-
-      # Optional: Ping Render to rebuild backend
-      - name: Trigger Render Deploy
-        run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
+        env:
+          MONGO_URI: mongodb://localhost:27017/testdb
+          JWT_SECRET: testingsecret
+        run: pnpm test
