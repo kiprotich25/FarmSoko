@@ -51,6 +51,7 @@
     "jsdom": "^26.1.0",
     "tw-animate-css": "^1.3.5",
     "vite": "^7.0.4",
+    "vite-plugin-pwa": "^1.0.3",
     "vitest": "^3.2.4"
   }
 }
